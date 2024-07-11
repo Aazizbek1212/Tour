@@ -37,8 +37,8 @@
                     <div class="search-close-btn" id="closeBtn">
                         <i class="pe-7s-close-circle" aria-hidden="true"></i>
                     </div>
-                    <form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
+                    <form action="{% url 'alltours' %}" method="GET">
+                        <input type="search" name="tourSearch" id="search" placeholder="Search">
                         <input type="submit" class="d-none" value="submit">
                     </form>
                 </div>
@@ -58,7 +58,7 @@
                         <div class="collapse navbar-collapse" id="dorneNav">
                             <ul class="navbar-nav mr-auto" id="dorneMenu">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -66,6 +66,7 @@
                                         <a class="dropdown-item" href="index.html">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
                                         <a class="dropdown-item" href="{% url 'list'}">Destinations</a>
+                                        <a class="dropdown-item" href="{%url 'alltours'%} ">Tours</a> 
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
                                         <a class="dropdown-item" href="contact.html">Contact</a>
                                     </div>
@@ -76,8 +77,10 @@
                                         <a class="dropdown-item" href="index.html">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
                                         <a class="dropdown-item" href="{% url 'list' %}">Destinations</a>
+                                        <a class="dropdown-item" href="{%url 'alltours'%} ">Tours</a> 
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
                                         <a class="dropdown-item" href="contact.html">Contact</a>
+                                        
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -304,45 +307,35 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12  col-lg-6">
                     <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s">
-                        <img src="img/bg-img/editor-1.jpg" alt="">
+                        <img src="{{destinations2.image.url}} "  alt="">
                         <div class="editors-pick-info">
                             <div class="places-total-destinations d-flex">
-                                <a href="#">New York</a>
-                                <a href="#">1643 Destinations</a>
+                                <a href="#">{{destinations2.title}}</a>
+                                <a href="#">Jami: {{destinations2.tours.count}} tur</a>
                             </div>
-                            <div class="add-more">
+                            {% comment %} <div class="add-more">
                                 <a href="#">+</a>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
+                    {%for destination in destinations%}
                     <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.4s">
-                        <img src="img/bg-img/editor-2.jpg" alt="">
+                        <img src="{{destination.image.url}}" alt="">
                         <div class="editors-pick-info">
                             <div class="places-total-destinations d-flex">
-                                <a href="#">Barcelona</a>
-                                <a href="#">943 Destinations</a>
+                                <a href="#">{{destination.title}}</a>
+                                <a href="#">Jami: {{destination.tour.count}} tur</a>
                             </div>
-                            <div class="add-more">
+                            {% comment %} <div class="add-more">
                                 <a href="#">+</a>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
-                    <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.6s">
-                        <img src="img/bg-img/editor-3.jpg" alt="">
-                        <div class="editors-pick-info">
-                            <div class="places-total-destinations d-flex">
-                                <a href="#">paris</a>
-                                <a href="#">243 Destinations</a>
-                            </div>
-                            <div class="add-more">
-                                <a href="#">+</a>
-                            </div>
-                        </div>
-                    </div>
+                    {%endfor%}
                 </div>
             </div>
         </div>

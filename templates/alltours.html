@@ -58,14 +58,14 @@
                         <div class="collapse navbar-collapse" id="dorneNav">
                             <ul class="navbar-nav mr-auto" id="dorneMenu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="{%url 'home'}">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{% url 'home'%}">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
-                                        <a class="dropdown-item" href="{% url 'list' %}">Destinations</a>
+                                        <a class="dropdown-item" href="{%url 'list'%}">Destinations</a>
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
                                         <a class="dropdown-item" href="contact.html">Contact</a>
                                     </div>
@@ -75,7 +75,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                                         <a class="dropdown-item" href="{% url 'home'%}">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
-                                        <a class="dropdown-item" href="{% url 'list' %}">Destinations</a>
+                                        <a class="dropdown-item" href="{%url 'list'%}">Destinations</a>
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
                                         <a class="dropdown-item" href="contact.html">Contact</a>
                                     </div>
@@ -115,30 +115,32 @@
                 <div class="col-12">
                     <div class="section-heading dark text-center">
                         <span></span>
-                        <h4>Featured destinations</h4>
+                        <h4>Featured tours</h4>
                         <p>Editor’s pick</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <!-- Single Features Area -->
-                {%for sayohat in sayohatlar%}
+                {%for tours in tour%}
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-features-area mb-50">
-                        <a href="{% url 'detailtour' sayohat.id %}"><img src="{{sayohat.image.url}}" alt="{{sayohat.name}}">
+                        
+                        <a href="{%url 'detailtour' tours.id %}"><img src="{{tours.image.url}}" alt="{{tours.name}}"></a>
                         <!-- Price -->
                         <div class="price-start">
-                            <p>FROM UZS {{sayohat.price}}</p>
-                        </div> 
+                            <p>FROM UZS {{tours.price}}</p>
+                        </div>
                         <div class="feature-content d-flex align-items-center justify-content-between">
                             <div class="feature-title">
-                                <h5>{{sayohat.name}}</h5>
-                                {% comment %} <p>{% for i in destination.country.all %}{{ i.namee }}{% endfor %}</p> {% endcomment %}
+                                <h5>{{tours.name}}</h5>
+                                <p>{% for i in destination.country.all %}{{ i.namee }}{% endfor %}</p>
                             </div>
                             <div class="feature-favourite">
                                 <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
                 {%endfor%}

@@ -10,9 +10,13 @@ from apps.tour.models import Country, Destination, Tour
 
 
 
-def main_view(request):
-    tour = Tour.objects.all()[:4]
-    return render(request , 'index.html', {'tour':tour})
+def home_view(request):
+
+    destinations = Destination.objects.all()[:2]
+    destinations2 = Destination.objects.all()[2:3].first()
+    tour = Tour.objects.all()[:5]
+    return render(request , 'index.html', {'tour':tour, 'destinations':destinations,'destinations2':destinations2 })
+    
 
 
 
@@ -47,10 +51,31 @@ def tours2_view(request, pk):
 
 
 
+
+
 def detail_view(request, pk):
     sayohat = Tour.objects.get(id=pk)
 
     return render(request, 'detail.html', {'sayohat':sayohat})
+
+
+
+
+# class ToursList(ListView):
+#     model = Tour
+#     template_name = 'alltours.html'
+#     context_object_name = 'tour'
+
+
+def tours(request):
+    query = request.GET.get('tourSearch')
+    tour = Tour.objects.all()
+    if query:
+        tour = tour.filter(name__icontains=query)
+
+    return render(request, 'alltours.html', {'tour':tour})    
+
+
 
 
 

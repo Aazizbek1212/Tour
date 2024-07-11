@@ -37,8 +37,8 @@
                     <div class="search-close-btn" id="closeBtn">
                         <i class="pe-7s-close-circle" aria-hidden="true"></i>
                     </div>
-                    <form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
+                    <form action="{% url 'alltours' %}" method="GET">
+                        <input type="search" name="tourSearch" id="search" placeholder="Search">
                         <input type="submit" class="d-none" value="submit">
                     </form>
                 </div>
@@ -58,12 +58,12 @@
                         <div class="collapse navbar-collapse" id="dorneNav">
                             <ul class="navbar-nav mr-auto" id="dorneMenu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="{%url 'home'%}">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="index.html">Home</a>
+                                        <a class="dropdown-item" href="{%url 'home'%}">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
                                         <a class="dropdown-item" href="{% url 'list'}">Destinations</a>
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
@@ -73,7 +73,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listings <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                        <a class="dropdown-item" href="index.html">Home</a>
+                                        <a class="dropdown-item" href="{%url 'home'%}">Home</a>
                                         <a class="dropdown-item" href="{% url 'davlatlar'%}">Countries</a>
                                         <a class="dropdown-item" href="{% url 'list' %}">Destinations</a>
                                         <a class="dropdown-item" href="single-listing.html">Single Listing</a>
@@ -131,8 +131,8 @@
                     <div class="single-listing-content">
 
                         <div class="listing-title">
-                            <h4>Burger House soho</h4>
-                            <h6>First Avenue no 83</h6>
+                            <h4>{{sayohat.name}}</h4>
+                            <h6>{%for davalat in sayohat.countries.all%}{{davlat.namee}}{%endfor%}</h6>
                         </div>
 
                         <div class="single-listing-nav">
@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="overview-content mt-50" id="overview">
-                            <p>{{sayohat.description}}</p>
+                            <p>{{sayohat.description | safe}}</p>
                             <div class="row mt-5">
                                 {% comment %} <div class="col-6">
                                     <label class="custom-control custom-checkbox mb-3">

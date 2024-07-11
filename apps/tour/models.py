@@ -22,6 +22,10 @@ class Destination(BaseModel):
         return self.title
     
 
+    class Meta:
+        ordering = ('-id' ,)
+    
+
     @property
     def lowest_price(self):
         try:
@@ -31,6 +35,14 @@ class Destination(BaseModel):
             return 0
 
 
+
+class Category(BaseModel):
+    name = models.CharField(max_length=100)
+
+
+
+
+
 class Tour(BaseModel):
     name = models.CharField(max_length=250)
     description = RichTextField(blank=True, null=True)
@@ -38,7 +50,15 @@ class Tour(BaseModel):
     image = models.ImageField(upload_to='images/tours/')
     destinations = models.ManyToManyField(Destination, blank=True)
     countries = models.ManyToManyField(Country, blank=True)
+    categories = models.ManyToManyField(Category , blank=True)
 
     def __str__(self):
         return self.name
+    
+
+    class Meta:
+        ordering = ('-id' ,)
+
+
+
 

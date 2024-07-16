@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from rest_framework.decorators import api_view
+from django_filters.views import FilterView
 from rest_framework.response import Response
 from apps.main.serializers import TourSerializer
 
-from apps.tour.models import Country, Destination, Tour
+from apps.tour.filters import TourFilter
+from apps.tour.models import Category, Country, Destination, Food, Hotel, Tour
 
 
 
@@ -15,7 +17,8 @@ def home_view(request):
     destinations = Destination.objects.all()[:2]
     destinations2 = Destination.objects.all()[2:3].first()
     tour = Tour.objects.all()[:5]
-    return render(request , 'index.html', {'tour':tour, 'destinations':destinations,'destinations2':destinations2 })
+    category  = Category.objects.all()
+    return render(request , 'index.html', {'tour':tour, 'destinations':destinations,'destinations2':destinations2, 'category':category })
     
 
 
@@ -29,12 +32,7 @@ class DestinationList(ListView):
 
 
 
-def country_view(request, pk):
-    country = Country.objects.get(id=pk)
-    destinations = country.destination_set.all()
-    # tour = Tour.objects.filter(destinations=destination)
 
-    return render(request, 'tours.html', {'country':country, 'destinations':destinations})
 
 
 def countries_view(request):
@@ -55,29 +53,42 @@ def tours2_view(request, pk):
 
 def detail_view(request, pk):
     sayohat = Tour.objects.get(id=pk)
-
+    sayohat.count += 1
+    sayohat.save()
     return render(request, 'detail.html', {'sayohat':sayohat})
 
 
 
 
-# class ToursList(ListView):
-#     model = Tour
-#     template_name = 'alltours.html'
-#     context_object_name = 'tour'
-
-
-def tours(request):
-    query = request.GET.get('tourSearch')
-    tour = Tour.objects.all()
-    if query:
-        tour = tour.filter(name__icontains=query)
-
-    return render(request, 'alltours.html', {'tour':tour})    
 
 
 
 
+
+
+
+class ToursView(FilterView):
+    model = Tour
+    template_name = 'alltours.html'
+    context_object_name = 'tours'
+    filterset_class = TourFilter
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        search = self.request.GET.get('tourSearch', None)
+        
+        if search:
+            qs = qs.filter(name__contains=search)
+        return qs
+
+
+        
+    
+
+
+def hotel_view(request, pk):
+    hotel = Hotel.objects.get(id=pk)
+    return render(request, 'hotel_detail.html', {'hotel':hotel})
 
 
 

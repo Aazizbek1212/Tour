@@ -111,6 +111,10 @@
     <!-- ***** Listing Destinations Area Start ***** -->
     <section class="dorne-listing-destinations-area section-padding-100-50">
         <div class="container">
+            <form action="{% url 'alltours' %}" method="get">
+                {{ filter.form.as_p}}
+                <button type="submit">Saralash</button>
+            </form>
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading dark text-center">
@@ -122,18 +126,18 @@
             </div>
             <div class="row">
                 <!-- Single Features Area -->
-                {%for tours in tour%}
+                {% for tour in tours %}
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-features-area mb-50">
                         
-                        <a href="{%url 'detailtour' tours.id %}"><img src="{{tours.image.url}}" alt="{{tours.name}}"></a>
+                        <a href="{%url 'detailtour' tour.id %}"><img src="{{tour.image.url}}" alt="{{tour.name}}"></a>
                         <!-- Price -->
                         <div class="price-start">
-                            <p>FROM UZS {{tours.price}}</p>
+                            <p>FROM UZS {{tour.price}}</p>
                         </div>
                         <div class="feature-content d-flex align-items-center justify-content-between">
                             <div class="feature-title">
-                                <h5>{{tours.name}}</h5>
+                                <h5>{{tour.name}}</h5>
                                 <p>{% for i in destination.country.all %}{{ i.namee }}{% endfor %}</p>
                             </div>
                             <div class="feature-favourite">

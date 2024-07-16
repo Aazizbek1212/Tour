@@ -7,3 +7,10 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Image(BaseModel):
+    image = models.ImageField(upload_to='images/')
+
+
+

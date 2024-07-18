@@ -25,7 +25,6 @@ class Destination(BaseModel):
     class Meta:
         ordering = ('-id' ,)
     
-
     @property
     def lowest_price(self):
         try:
@@ -48,7 +47,6 @@ class Ingredient(BaseModel):
 
     def __str__(self):
         return self.name
-
 
 
 class HotelFacility(BaseModel):
@@ -80,11 +78,20 @@ class Tour(BaseModel):
     hotels = models.ManyToManyField(Hotel, blank=True)
     count = models.PositiveIntegerField(default=0)
     
-    
+    def __str__(self):
+        return self.name
+
+
+class Review(BaseModel):
+    name = models.CharField(max_length=500)
+    email = models.EmailField(max_length=200, blank=True, null=True)
+    report = models.TextField(blank=True, null=True)
+    rating = models.PositiveIntegerField(blank=True, null=True)
+    tours = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='reviews', blank=True, null=True)
 
     def __str__(self):
         return self.name
-    
+
 
 class Food(BaseModel):
     has_breakfast = models.BooleanField(default=True)

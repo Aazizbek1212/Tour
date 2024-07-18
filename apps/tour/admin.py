@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.tour.models import Category, Country, Destination, Food, Ingredient, Tour, Hotel, HotelFacility
+from apps.tour.models import Category, Country, Destination, Food, Ingredient, Review, Tour, Hotel, HotelFacility
 
 
 
@@ -12,3 +12,4 @@ admin.site.register(Ingredient)
 admin.site.register(Food)
 admin.site.register(Hotel)
 admin.site.register(HotelFacility)
+admin.site.register(Review)

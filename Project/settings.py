@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.main',
     'apps.tour',
     'apps.account',
+    'apps.bookings',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +105,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# CKEDITOR_CONFIGS = {
+#     'gefault': {
+#         'toolbar':'full',
+#         'height': 300,
+#     }
+#}
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 

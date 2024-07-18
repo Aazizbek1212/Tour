@@ -8,7 +8,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <style>
+        .stars-outer {
+            display: inline-block;
+            position: relative;
+            font-family: FontAwesome;
+        }
 
+        .stars-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+        }
+
+        .stars-outer::before {
+            content: "\f006 \f006 \f006 \f006 \f006";  /* Bosh yulduzchalar */
+            color: #ccc;
+        }
+
+        .stars-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";  /* To'ldirilgan yulduzchalar */
+            color: #f8ce0b;
+        }
+    </style>
     <!-- Title -->
     <title>Dorne - Directory &amp; Listing Template | Single Listing</title>
 
@@ -270,50 +295,33 @@
 
                         <div class="listing-reviews-area mt-100" id="review">
                             <h4>reviews</h4>
-                            <div class="single-review-area">
-                                <div class="reviewer-meta d-flex align-items-center">
-                                    <img src="img/clients-img/1.jpg" alt="">
-                                    <div class="reviewer-content">
-                                        <div class="review-title-ratings d-flex justify-content-between">
-                                            <h5>“The best Burger in town”</h5>
-                                            <div class="ratings">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
+                            {%for review in sayohat.reviews.all%}
+                                <div class="single-review-area">
+                                    <div class="reviewer-meta d-flex align-items-center">
+                                
+                                        <img src="{% static 'img/clients-img/1.jpg' %}" alt="">
+                                        <div class="reviewer-content">
+                                            <div class="review-title-ratings d-flex justify-content-between">
+                                                <div class="stars-outer">
+                                                    <div class="stars-inner" style="width: {{ product.rating_percentage }}%"></div>
+                                                </div>
+                                            </div>
+                                            <p>{{review.report}}</p>
+                                            <div class="reviewer-name">
+                                                <h6>{{review.name}}</h6>
+                                                <p>{{review.email}}</p><p>{{review.created_at}}</p>
+    
                                             </div>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
+                                        
+                                    
                                     </div>
+                                
                                 </div>
-                                <div class="reviewer-name">
-                                    <h6>Christinne Smith</h6>
-                                    <p>12 November 2017</p>
-                                </div>
-                            </div>
-                            <div class="single-review-area">
-                                <div class="reviewer-meta d-flex align-items-center">
-                                    <img src="img/clients-img/1.jpg" alt="">
-                                    <div class="reviewer-content">
-                                        <div class="review-title-ratings d-flex justify-content-between">
-                                            <h5>“Quality ingredients”</h5>
-                                            <div class="ratings">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-fill.png" alt="">
-                                                <img src="img/clients-img/star-unfill.png" alt="">
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
-                                    </div>
-                                </div>
-                                <div class="reviewer-name">
-                                    <h6>Michael Brown</h6>
-                                    <p>12 November 2017</p>
-                                </div>
-                            </div>
+                            {%endfor%} 
+                          
+                            
+                        
                         </div>
 
                         <div class="location-on-map mt-50" id="lomap">

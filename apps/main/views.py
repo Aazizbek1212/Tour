@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from apps.main.serializers import TourSerializer
 
 from apps.tour.filters import TourFilter
-from apps.tour.models import Category, Country, Destination, Food, Hotel, Tour
+from apps.tour.models import Category, Country, Destination, Food, Hotel, Review, Tour
 
 
 

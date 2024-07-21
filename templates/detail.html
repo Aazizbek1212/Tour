@@ -339,12 +339,12 @@
                     <div class="listing-sidebar">
 
                         <!-- Listing Verify -->
-                        <div class="listing-verify">
+                        {% comment %} <div class="listing-verify">
                             <a href="#" class="btn dorne-btn w-100"><i class="fa fa-check pr-3"></i> Verified Listing</a>
-                        </div>
+                        </div> {% endcomment %}
 
                         <!-- Book A Table Widget -->
-                        <div class="book-a-table-widget mt-50">
+                        {% comment %} <div class="book-a-table-widget mt-50">
                             <h6>Book A Table</h6>
                             <form action="#" method="get">
                                 <select class="custom-select" id="destinations">
@@ -363,10 +363,10 @@
                             </select>
                                 <button type="submit" class="btn dorne-btn bg-white text-dark"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
                             </form>
-                        </div>
+                        </div> {% endcomment %}
 
                         <!-- Opening Hours Widget -->
-                        <div class="opening-hours-widget mt-50">
+                        {% comment %} <div class="opening-hours-widget mt-50">
                             <h6>Opening Hours</h6>
                             <ul class="opening-hours">
                                 <li>
@@ -398,7 +398,7 @@
                                     <p>9 AM - 1 PM</p>
                                 </li>
                             </ul>
-                        </div>
+                        </div> {% endcomment %}
 
                         <!-- Author Widget -->
                         <div class="author-widget mt-50 d-flex align-items-center">
@@ -410,21 +410,25 @@
                         </div>
 
                         <!-- Contact Form -->
-                        <div class="contact-form contact-form-widget mt-50">
-                            <h6>Contact Business</h6>
-                            <form action="#">
+                        <div id="book" class="contact-form contact-form-widget mt-50">
+                            <h6>Buyurtma berish</h6>
+                            <form action="{% url 'create_booking' sayohat.id %}" method='POST'>
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-12">
-                                        <input type="text" name="name" class="form-control" placeholder="Your Name">
+                                        <label for="adult_count">Kattalar</label>
+                                        <input type="number" value="1" name="adult_count" class="form-control" placeholder="Kattalar soni">
                                     </div>
                                     <div class="col-12">
-                                        <input type="email" name="email" class="form-control" placeholder="Email Address">
+                                        <label for="kid_count">Bolalar</label>
+                                        <input type="number" value="0" name="kid_count" class="form-control" placeholder="Bolalar soni">
                                     </div>
                                     <div class="col-12">
-                                        <textarea name="message" class="form-control" id="Message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                                        <label for="pet_count">Uy hayvonlari</label>
+                                        <input type="number" value="0" name="pet_count" class="form-control" placeholder="Hayvonlar soni">
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn dorne-btn">Send</button>
+                                        <button type="submit" class="btn dorne-btn">Yuborish</button>
                                     </div>
                                 </div>
                             </form>

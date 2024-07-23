@@ -21,25 +21,15 @@ def home_view(request):
     return render(request , 'index.html', {'tour':tour, 'destinations':destinations,'destinations2':destinations2, 'category':category })
     
 
-
-
-
 class DestinationList(ListView):
     model = Destination
     template_name = 'list.html'
     context_object_name = 'destinations'
 
 
-
-
-
-
-
 def countries_view(request):
     countries = Country.objects.all()
     return render(request, 'countries.html',{'countries':countries})
-
-
 
 
 def tours2_view(request, pk):
@@ -48,23 +38,11 @@ def tours2_view(request, pk):
     return render(request, 'tours2.html', {'destinations':destinations, 'sayohatlar':sayohatlar})
 
 
-
-
-
 def detail_view(request, pk):
     sayohat = Tour.objects.get(id=pk)
     sayohat.count += 1
     sayohat.save()
     return render(request, 'detail.html', {'sayohat':sayohat})
-
-
-
-
-
-
-
-
-
 
 
 class ToursView(FilterView):
@@ -82,16 +60,9 @@ class ToursView(FilterView):
         return qs
 
 
-        
-    
-
-
 def hotel_view(request, pk):
     hotel = Hotel.objects.get(id=pk)
     return render(request, 'hotel_detail.html', {'hotel':hotel})
-
-
-
 
 
 @api_view(['GET'])  

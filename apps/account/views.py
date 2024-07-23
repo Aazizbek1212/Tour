@@ -7,7 +7,6 @@ from django.contrib import messages
 
 def login_user(request):
     if request.method == 'POST':
-        print('post')
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
@@ -22,14 +21,6 @@ def login_user(request):
         return render(request, 'login.html' )
     
 
-
-
-
-    
-
-
-
-
 def register_user(request):
     form = UserCreationForm()
     if request.method == 'POST':
@@ -40,7 +31,6 @@ def register_user(request):
         else:
             messages.add_message(request,messages.WARNING, form.errors)
     return render(request, 'register.html', {'form':form})
-
 
 
 def logout_user(request):
